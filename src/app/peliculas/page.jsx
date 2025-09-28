@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchMovies() {
       try {
-        const response = await fetch(`https://mflixbackend.azurewebsites.net/api/movies?pageSize=10&page=${page}`);
+        const response = await fetch(`https://mflixbackend.azurewebsites.net/api/movies?pageSize=30&page=${page}`);
         const data = await response.json();
         setMovies(data);
         setLoading(false);
@@ -26,22 +26,22 @@ export default function Home() {
   }, [page]);
 
   return (
-    <main className="movies-container">      
+    <main className="movies-container">
       {loading ? (
         <p>Cargando películas...</p>
       ) : (
         <>
           <MovieList movies={movies} />
           <div className="pagination">
-            <button 
-              onClick={() => setPage(prev => prev > 1 ? prev - 1 : 1)} 
+            <button
+              onClick={() => setPage(prev => prev > 1 ? prev - 1 : 1)}
               disabled={page === 1}
               className="pagination-button"
             >
               ← Anterior
             </button>
             <span className="pagination-info">Página {page}</span>
-            <button 
+            <button
               onClick={() => setPage(prev => prev + 1)}
               className="pagination-button"
             >
